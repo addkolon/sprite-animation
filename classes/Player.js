@@ -31,7 +31,7 @@ class Player {
       up: {
         x: 0,
         y: 192,
-      },      
+      },
     };
 
     this.currentDirection = this.direction.down;
@@ -42,28 +42,45 @@ class Player {
     // Blue square debug code
     c.fillStyle = "rgba(0, 0, 255, 0.5)";
     c.fillRect(this.x, this.y, this.width, this.height);
+
+    // FORMULA
+    // s = source (Vilken del av bilden ska ritas)
+    // d = destination (Vart skall denna ritas ut och hur stor skall den vara?)
+
+    // this.image, // Add the image to the canvas
+
+    // sx, // Add the x position of the image
+    // sy, // Add the y position of the image
+    // sWidth, // Add the width of the image
+    // sHeight, // Add the height of the image
+
+    // dx, // Add the x position of the image on the canvas
+    // dy, // Add the y position of the image on the canvas
+    // dWidth, // Add the width of the image on the canvas
+    // dHeight // Add the height of the image on the canvas
+
     c.drawImage(
       this.image, // Add the image to the canvas
 
-      // Vårat fönster (vilken del av bilden skall ritas ut?)
-      this.currentDirection.x, // Add the x position of the image
-      this.currentDirection.y,  // Add the y position of the image
-      this.frameWidth, // Add the width of the image
-      this.frameHeight, // Add the height of the image
-      
+      // Vilken del av bilden skall ritas ut?
+      this.currentDirection.x, // sx
+      this.currentDirection.y, // sy
+      this.frameWidth, // sWidth
+      this.frameHeight, // sHeight
+
       // Vart skall denna ritas ut och hur stor skall den vara?
-      this.x, // Add the x position of the image on the canvas
-      this.y, // Add the y position of the image on the canvas
-      this.width, // Add the width of the image on the canvas
-      this.height // Add the height of the image on the canvas
+      this.x, // dx
+      this.y, // dy
+      this.width, // dWidth
+      this.height // dHeight
     );
   }
 
-  // Update the player's position 
+  // Update the player's position
   update(deltaTime) {
     if (!deltaTime) return;
 
-    // Update horizontal position 
+    // Update horizontal position
     this.updateHorizontalPosition(deltaTime);
 
     // Update vertical position
