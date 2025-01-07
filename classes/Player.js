@@ -12,29 +12,35 @@ class Player {
     this.image = new Image();
     this.image.src = "./images/character.png";
 
-    this.frameWidth = size;
-    this.frameHeight = size;
+    this.frameWidth = this.width;  // 64px
+    this.frameHeight = this.height; // 64px
 
     this.direction = {
       down: {
         x: 0,
-        y: 0,
+        y: this.frameHeight * 0, // 0
       },
       left: {
         x: 0,
-        y: 64,
+        y: this.frameHeight * 1, // 64
       },
       right: {
         x: 0,
-        y: 128,
+        y: this.frameHeight * 2, // 128
       },
       up: {
         x: 0,
-        y: 192,
+        y: this.frameHeight * 3, // 192
       },
     };
 
     this.currentDirection = this.direction.down;
+
+    this.frameX = 0;
+    this.totalFrames = 4;
+    this.frameTimer = 0;
+    // Ju lägre värde, ju snabbare animationen
+    this.frameInterval = .12;
   }
 
   // Draw the player on the canvas
@@ -43,42 +49,63 @@ class Player {
     c.fillStyle = "rgba(0, 0, 255, 0.5)";
     c.fillRect(this.x, this.y, this.width, this.height);
 
+
     // FORMULA
     // s = source (Vilken del av bilden ska ritas)
     // d = destination (Vart skall denna ritas ut och hur stor skall den vara?)
 
     // this.image, // Add the image to the canvas
 
+    // Source Image Cut out
     // sx, // Add the x position of the image
     // sy, // Add the y position of the image
     // sWidth, // Add the width of the image
     // sHeight, // Add the height of the image
 
+    // Where to place Cut out image on the canvas
     // dx, // Add the x position of the image on the canvas
     // dy, // Add the y position of the image on the canvas
     // dWidth, // Add the width of the image on the canvas
     // dHeight // Add the height of the image on the canvas
 
     c.drawImage(
-      this.image, // Add the image to the canvas
+      this.image, // Skapar ett bildobjekt - character.png
 
       // Vilken del av bilden skall ritas ut?
-      this.currentDirection.x, // sx
+      this.frameX * this.frameWidth, // sx
       this.currentDirection.y, // sy
-      this.frameWidth, // sWidth
-      this.frameHeight, // sHeight
+      this.frameWidth, // sWidth - frameWidth = 64
+      this.frameHeight, // sHeight - frameHeight = 64
 
       // Vart skall denna ritas ut och hur stor skall den vara?
       this.x, // dx
       this.y, // dy
-      this.width, // dWidth
-      this.height // dHeight
+      this.width, // dWidth -  width = 64
+      this.height // dHeight - height = 64
     );
   }
 
   // Update the player's position
   update(deltaTime) {
     if (!deltaTime) return;
+
+    // console.log(deltaTime);
+    // deltaTime = 0.016666666666666666
+    
+    this.frameTimer += deltaTime;
+    // console.log('frameTimer:', this.frameTimer);
+    if (this.frameTimer >= this.frameInterval) {
+      this.frameTimer = 0;
+      this.frameX += 1;
+    }
+    // console.log('frameX', this.frameX);
+
+    // Säkerställer att den inte går längre än totalFrames = 4;
+    if (this.frameX >= this.totalFrames) {
+      this.frameX = 0;
+    }
+
+    // console.log(this.frameX);
 
     // Update horizontal position
     this.updateHorizontalPosition(deltaTime);

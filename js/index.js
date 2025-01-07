@@ -9,8 +9,8 @@ canvas.height = 576 * dpr
 
 // Change xy coordinates to move player's default position
 const player = new Player({
-  x: 100,
-  y: 100,
+  x: 300,
+  y: 400,
   size: 64,
 })
 
