@@ -12,7 +12,7 @@ class Player {
     this.image = new Image();
     this.image.src = "./images/character.png";
 
-    this.frameWidth = this.width;  // 64px
+    this.frameWidth = this.width; // 64px
     this.frameHeight = this.height; // 64px
 
     this.direction = {
@@ -40,15 +40,15 @@ class Player {
     this.totalFrames = 4;
     this.frameTimer = 0;
     // Ju lägre värde, ju snabbare animationen
-    this.frameInterval = .12;
+    this.frameInterval = 0.12;
   }
 
   // Draw the player on the canvas
   draw(c) {
-    // Blue square debug code
-    c.fillStyle = "rgba(0, 0, 255, 0.5)";
-    c.fillRect(this.x, this.y, this.width, this.height);
-
+    
+    // // Blue square debug code
+    // c.fillStyle = "rgba(0, 0, 255, 0.5)";
+    // c.fillRect(this.x, this.y, this.width, this.height);
 
     // FORMULA
     // s = source (Vilken del av bilden ska ritas)
@@ -89,23 +89,22 @@ class Player {
   update(deltaTime) {
     if (!deltaTime) return;
 
-    // console.log(deltaTime);
-    // deltaTime = 0.016666666666666666
-    
-    this.frameTimer += deltaTime;
-    // console.log('frameTimer:', this.frameTimer);
-    if (this.frameTimer >= this.frameInterval) {
-      this.frameTimer = 0;
-      this.frameX += 1;
+    // Player Sprite Animation
+    if (this.velocity.x !== 0 || this.velocity.y !== 0) {
+      this.frameTimer += deltaTime;
+      // frameInterval = 0.12
+      if (this.frameTimer >= this.frameInterval) {
+        this.frameTimer = 0;
+        this.frameX += 1;
+      }
+    } else {
+      this.frameX = 0;
     }
-    // console.log('frameX', this.frameX);
 
     // Säkerställer att den inte går längre än totalFrames = 4;
     if (this.frameX >= this.totalFrames) {
       this.frameX = 0;
     }
-
-    // console.log(this.frameX);
 
     // Update horizontal position
     this.updateHorizontalPosition(deltaTime);
