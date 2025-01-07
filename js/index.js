@@ -2,6 +2,7 @@ const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 const dpr = window.devicePixelRatio || 1
 
+// Set canvas size
 canvas.width = 1024 * dpr
 canvas.height = 576 * dpr
 
@@ -13,6 +14,7 @@ const player = new Player({
   size: 64,
 })
 
+// Handle input
 const keys = {
   w: {
     pressed: false,
@@ -28,7 +30,9 @@ const keys = {
   },
 }
 
+// Handle animation loop
 let lastTime = performance.now()
+
 function animate() {
   // Calculate delta time
   const currentTime = performance.now()
@@ -41,10 +45,16 @@ function animate() {
 
   // Render scene
   c.save()
+
   c.scale(dpr, dpr)
+  // Clear canvas
   c.clearRect(0, 0, canvas.width, canvas.height)
+  // Draw player
   player.draw(c)
+
   c.restore()
+
+
 
   requestAnimationFrame(() => animate())
 }
