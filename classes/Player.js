@@ -50,9 +50,7 @@ class Player {
       this.currentDirection.y,  // Add the y position of the image
       this.frameWidth, // Add the width of the image
       this.frameHeight, // Add the height of the image
-
       
-
       // Vart skall denna ritas ut och hur stor skall den vara?
       this.x, // Add the x position of the image on the canvas
       this.y, // Add the y position of the image on the canvas
