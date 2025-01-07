@@ -10,7 +10,7 @@ canvas.height = 576 * dpr
 const player = new Player({
   x: 100,
   y: 100,
-  size: 32,
+  size: 64,
 })
 
 const keys = {
