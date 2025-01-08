@@ -1,5 +1,5 @@
-const X_VELOCITY = 200;
-const Y_VELOCITY = 200;
+let X_VELOCITY = 200;
+let Y_VELOCITY = 200;
 
 class Player {
   constructor({ x, y, size, velocity = { x: 0, y: 0 } }) {
@@ -124,6 +124,7 @@ class Player {
   handleInput(keys) {
     this.velocity.x = 0;
     this.velocity.y = 0;
+    
 
     if (keys.d.pressed) {
       this.velocity.x = X_VELOCITY;
@@ -138,5 +139,19 @@ class Player {
       this.velocity.y = Y_VELOCITY;
       this.currentDirection = this.direction.down;
     }
+
+    if (keys.j.pressed) {
+      X_VELOCITY = 400;
+      Y_VELOCITY = 400;
+      this.frameInterval = 0.09;
+  } else if (keys.k.pressed) {
+      X_VELOCITY = 20;
+      Y_VELOCITY = 20;
+      this.frameInterval = 0.3;
+  } else {
+      X_VELOCITY = 200;
+      Y_VELOCITY = 200;
+      this.frameInterval = 0.12;
+  }
   }
 }
