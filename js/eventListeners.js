@@ -12,6 +12,10 @@ window.addEventListener('keydown', (event) => {
     case 'd':
       keys.d.pressed = true
       break
+    // 1. Springa - Lägg till ett nytt case för att börja springa
+    case 'j':
+      keys.j.pressed = true
+      break
   }
 })
 
@@ -28,6 +32,10 @@ window.addEventListener('keyup', (event) => {
       break
     case 'd':
       keys.d.pressed = false
+      break
+    // 2. Springa - Lägg till ett nytt case för att sluta springa
+    case 'j':
+      keys.j.pressed = false
       break
   }
 })

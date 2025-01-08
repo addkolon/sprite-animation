@@ -1,5 +1,6 @@
-const X_VELOCITY = 200;
-const Y_VELOCITY = 200;
+// 5. Springa - Ändra till Let eftersom vi vill ändra värdet
+let X_VELOCITY = 200;
+let Y_VELOCITY = 200;
 
 class Player {
   constructor({ x, y, size, velocity = { x: 0, y: 0 } }) {
@@ -39,7 +40,7 @@ class Player {
     this.frameX = 0;
     this.totalFrames = 4;
     this.frameTimer = 0;
-    // Ju lägre värde, ju snabbare animationen
+    // Ju lägre värde, ju snabbare animation
     this.frameInterval = 0.12;
   }
 
@@ -137,6 +138,17 @@ class Player {
     } else if (keys.s.pressed) {
       this.velocity.y = Y_VELOCITY;
       this.currentDirection = this.direction.down;
+    }
+
+    // 4. Springa - Lägg till logik för att springa
+    if (keys.j.pressed) {
+      X_VELOCITY = 400
+      Y_VELOCITY = 400;
+      this.frameInterval = 0.04;
+    } else {
+      X_VELOCITY = 200
+      Y_VELOCITY = 200;
+      this.frameInterval = 0.12;
     }
   }
 }

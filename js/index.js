@@ -6,6 +6,13 @@ const dpr = window.devicePixelRatio || 1
 canvas.width = 1024 * dpr
 canvas.height = 576 * dpr
 
+// 2. Bakgrund - Skapa en instans av klassen med parametrar
+const background = new Background({
+  x: 0,
+  y: 0,
+  imageSrc: './images/background1.png',
+})
+
 
 // Change xy coordinates to move player's default position
 const player = new Player({
@@ -28,6 +35,10 @@ const keys = {
   d: {
     pressed: false,
   },
+  // 3. Springa - Sätt den till att vara false initialt
+  j: {
+    pressed: false,
+  }
 }
 
 // Handle animation loop
@@ -49,6 +60,11 @@ function animate() {
   c.scale(dpr, dpr)
   // Clear canvas
   c.clearRect(0, 0, canvas.width, canvas.height)
+
+  // Draw background
+  // 3. Bakgrund - Anropa metoden draw på instansen av klassen
+  background.draw(c)
+
   // Draw player
   player.draw(c)
 
